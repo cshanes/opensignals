@@ -288,7 +288,7 @@ def download_data(db_dir, recreate=False):
 
     for start_date, tickers in ticker_missing_grouped.iteritems():
         print(f'count {count}')
-        temp_df = download_tickers(tickers.split(' '), start=start_date)
+        temp_df = download_tickers(tickers[:50].split(' '), start=start_date)
 
         # Yahoo Finance returning previous day in some situations
         # (e.g. Friday in TelAviv markets)
