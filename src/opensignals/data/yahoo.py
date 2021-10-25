@@ -285,7 +285,9 @@ def download_data(db_dir, recreate=False):
     )
     concat_dfs = []
     count = 0
+
     for start_date, tickers in ticker_missing_grouped.iteritems():
+        print(f'count {count}')
         temp_df = download_tickers(tickers.split(' '), start=start_date)
 
         # Yahoo Finance returning previous day in some situations
