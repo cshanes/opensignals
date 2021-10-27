@@ -284,11 +284,9 @@ def download_data(db_dir, recreate=False):
         lambda x: ' '.join(x.yahoo.astype(str))
     )
     concat_dfs = []
-    count = 0
 
     for start_date, tickers in ticker_missing_grouped.iteritems():
-        print(f'count {count}')
-        temp_df = download_tickers(tickers[:50].split(' '), start=start_date)
+        temp_df = download_tickers(tickers[:100].split(' '), start=start_date)
 
         # Yahoo Finance returning previous day in some situations
         # (e.g. Friday in TelAviv markets)
@@ -302,11 +300,6 @@ def download_data(db_dir, recreate=False):
             dict(zip(ticker_map['yahoo'], ticker_map['bloomberg_ticker'])))
 
         concat_dfs.append(temp_df)
-
-        if count > 5:
-            break
-
-        count += 1
 
     if len(concat_dfs) == 0:
         logger.info('Dataset up to date')
